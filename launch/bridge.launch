@@ -1,0 +1,7 @@
+<launch>
+
+  <node pkg="moos-ros-bridge" type="Bridge" name="Bridge" 
+        args="$(find moos-ros-bridge)/config/bridge_msgs.xml $(find moos-ros-bridge)/config/bridge.moos" 
+        respawn="false" output="screen" />
+  
+</launch>

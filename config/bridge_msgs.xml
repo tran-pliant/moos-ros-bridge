@@ -1,0 +1,37 @@
+<moosrosconfig>
+
+
+  <message>
+    <moosname>DUMMY_VAR</moosname>
+    <rosname>/moos/localization/odom</rosname>
+    <moostype>String</moostype>
+    <rostype>nav_msgs/Odometry</rostype>
+    <direction>toROS</direction>
+  </message>
+
+  <message>
+    <moosname>SONAR_REMAP_IMAGE</moosname>
+    <rosname>/moos/sonar_remap_image</rosname>
+    <moostype>String</moostype>
+    <rostype>sensor_msgs/CompressedImage</rostype>
+    <direction>toROS</direction>
+  </message>
+
+  <message>
+    <moosname>SONAR_REMAP_IMAGE_GRID</moosname>
+    <rosname>/moos/sonar_remap_image_grid</rosname>
+    <moostype>String</moostype>
+    <rostype>sensor_msgs/CompressedImage</rostype>
+    <direction>toROS</direction>
+  </message>
+  
+  <message>
+    <moosname>SONAR_RANGE_RES</moosname>
+    <rosname>/moos/sonar_range_resolution</rosname>
+    <moostype>Double</moostype>
+    <rostype>std_msgs/Float64</rostype>
+    <direction>toROS</direction>
+  </message>
+
+
+</moosrosconfig>

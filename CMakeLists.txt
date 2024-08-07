@@ -14,6 +14,7 @@ link_directories(${MOOS_LIBRARY_DIRS})
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -138,6 +139,7 @@ include_directories(
 add_executable(Bridge
   src/MOOSNode.cpp
   src/Bridge.cpp
+  include/base64_utils/base64.cpp
   )
 
 # Specify libraries to link a library or executable target against
@@ -146,14 +148,14 @@ target_link_libraries(Bridge
   ${MOOS_LIBRARIES}
   )
 
-add_executable(counter
-  src/counter.cpp
-  )
+# add_executable(counter
+#   src/counter.cpp
+#   )
 
-# Specify libraries to link a library or executable target against
-target_link_libraries(counter
-  ${catkin_LIBRARIES}
-  )
+# # Specify libraries to link a library or executable target against
+# target_link_libraries(counter
+#   ${catkin_LIBRARIES}
+#   )
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -174,13 +176,14 @@ target_link_libraries(counter
 
 # Mark executable scripts (Python etc.) for installation
 # in contrast to setup.py, you can choose the destination
-install(PROGRAMS
-  scripts/counter.sh
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  )
+# install(PROGRAMS
+#   scripts/counter.sh
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#   )
 
 # Mark executables and/or libraries for installation
-install(TARGETS Bridge counter
+# remove: counter
+install(TARGETS Bridge
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -193,9 +196,10 @@ install(TARGETS Bridge counter
 #   PATTERN ".svn" EXCLUDE
 # )
 
+# replaced: counter.launch
 # Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
-  launch/counter.launch
+  launch/bridge.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   )
 

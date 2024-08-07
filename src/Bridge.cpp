@@ -65,6 +65,8 @@
 #include "std_msgs/Float32.h"
 #include "std_msgs/Float64.h"
 #include "std_msgs/String.h"
+#include "sensor_msgs/CompressedImage.h"
+#include "nav_msgs/Odometry.h"
 
 #define FAIL 1
 #define SUCCESS 0
@@ -204,6 +206,18 @@ int CreateROSPubSub(xml_node<> *node, vector<MsgContainer> *pubVec, vector<MsgCo
 					      node->first_node("rosname")->value(),
 					      node->first_node("moostype")->value(),
 					      node->first_node("rostype")->value()));
+	  }else if(strcmp(node->first_node("rostype")->value(),"sensor_msgs/CompressedImage") == SUCCESS){
+	       pubVec->push_back(MsgContainer(n->advertise<sensor_msgs::CompressedImage>(node->first_node("rosname")->value(),1000),
+					      node->first_node("moosname")->value(),
+					      node->first_node("rosname")->value(),
+					      node->first_node("moostype")->value(),
+					      node->first_node("rostype")->value()));
+	  }else if(strcmp(node->first_node("rostype")->value(),"nav_msgs/Odometry") == SUCCESS){
+	       pubVec->push_back(MsgContainer(n->advertise<nav_msgs::Odometry>(node->first_node("rosname")->value(),1000),
+					      node->first_node("moosname")->value(),
+					      node->first_node("rosname")->value(),
+					      node->first_node("moostype")->value(),
+					      node->first_node("rostype")->value()));
 	  }else{
 	       ROS_INFO("ERROR PARSING XML CONFIG FILE\n");
 	       return FAIL;
@@ -311,7 +325,7 @@ int main(int argc, char **argv)
           if(CreateROSPubSub(node,&pubVec,&subVec,&n) == FAIL)
                return 0;
 
-     ros::Rate loop_rate(10);
+     ros::Rate loop_rate(30);
 
      //Kick off the MOOS Loop in a separate thread
      //before entering the ROS Loop

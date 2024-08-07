@@ -38,6 +38,13 @@
 #include <vector>
 #include "MsgContainer.h"
 #include <string.h>
+// msg type includes
+#include "nav_msgs/Odometry.h"
+#include <tf2_ros/transform_broadcaster.h>
+#include "geometry_msgs/TransformStamped.h"
+#include <sensor_msgs/Image.h>
+#include <sensor_msgs/CompressedImage.h>
+
 
 class MOOSNode : public CMOOSApp { 
 public:
@@ -66,10 +73,37 @@ protected:
 	//called when we are starting up..
 	bool OnStartUp();
 
+	void handle_odom_msg(string arg);
+	
+	// void handle_raw_imu_data(double msg_time, const cray::protobuf::IMU& imu_raw_);
+
+	// void handle_raw_depth_data(double msg_time, const cray::protobuf::DEPTH& dep_raw_);
+
+	void e2q(double y, double p, double r);
+
 void DoRegistrations();
 
 private:
 	vector<MsgContainer> *msgVec;
 
+	nav_msgs::Odometry odom_msg;
+	// if we have RAW_IMU_DATA and RAW_DEPTH_DATA
+	// bool updatedOdom[4] = {false};
+	// if we have nav_roll, nav_pitch, nav_yaw, nav_depth instead
+	std::vector<bool> updatedOdom = {false, false, false, false, false, false};
+	// std::vector<bool> updatedOdom(6, false); // why doenst this work?
+	// double rawIMURoll;
+	// double rawIMUPitch;
+	// double rawIMUHeading;
+	double nav_roll;
+	double nav_pitch;
+	double nav_yaw;
+	double nav_x;
+	double nav_y;
+	double nav_z;
+	double qx;
+	double qy;
+	double qz;
+	double qw;
 };
 #endif
